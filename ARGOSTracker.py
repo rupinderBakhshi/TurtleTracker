@@ -3,7 +3,7 @@
 #
 # Description: Parses a line of ARGOS tracking data 
 #
-# Created by: John Fay (john.fay@duke.edu)
+# Created by: Rupinder Bakhshi (rupinder.bakhshi@duke.edu)
 # Created on: Fall 2019
 #--------------------------------------------------------------
 
@@ -39,12 +39,20 @@ for lineString in lineStrings:
     obsLat = lineData[5]                # Observation Latitude
     obsLon = lineData[6]                # Observation Longitude
 
-    # Add values to dictionary
-    dateDict[recordID] = obsDateTime   
-    locationDict[recordID] = (obsLat, obsLon) 
+# Filters out records
+    if obsLC in ('1','2','3'):
+        # Add values to dictionary
+        dateDict[recordID] = obsDate   
+        locationDict[recordID] = (obsLat, obsLon) 
 
 # Indicate script is complete
 print ("Finished")
 
+#Ask user for date
+userDate= '7/3/2003' #input("Enter a date M/D/YYYY:")
 
-
+# collect keys matching user date
+keyList=[]
+for k,v in dateDict.items():
+     if v== userDate:
+         keyList.append(k)

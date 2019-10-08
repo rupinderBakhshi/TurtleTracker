@@ -8,7 +8,7 @@
 #--------------------------------------------------------------
 
 # Create a variable pointing to the file with no header
-fileName ="Data/Raw/SaraNoHeader.txt"
+fileName ="Data/Raw/sara.txt"
 
 # Open the file as a read-only file object
 fileObj = open(fileName, 'r')
@@ -26,10 +26,11 @@ locationDict = {}
 
 # Use a for loop to read each line, one at a time, until the list is exhausted
 for lineString in lineStrings:
+    #Skip the non-data lines
+    if lineString[0] !='2': continue
 
     # Use the split command to parse the items in lineString into a list object
     lineData = lineString.split("\t")
-
     # Assign variables to specfic items in the list
     recordID = lineData[0]              # ARGOS tracking record ID
     obsDateTime = lineData[2]           # Observation date and time (combined)
@@ -45,14 +46,19 @@ for lineString in lineStrings:
         dateDict[recordID] = obsDate   
         locationDict[recordID] = (obsLat, obsLon) 
 
-# Indicate script is complete
-print ("Finished")
-
 #Ask user for date
-userDate= '7/3/2003' #input("Enter a date M/D/YYYY:")
+userDate= input("Enter a date M/D/YYYY:")
 
 # collect keys matching user date
 keyList=[]
 for k,v in dateDict.items():
      if v== userDate:
          keyList.append(k)
+  # Report if no keys are found
+if len(keyList)==0:
+    print("No records found for {}".format(userDate)) 
+else:
+    #show coordinates
+    for key in keyList:
+        theCoordinate= locationDict[key]
+        print("Turtle found at {}".format(theCoordinate))

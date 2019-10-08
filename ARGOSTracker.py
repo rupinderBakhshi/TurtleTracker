@@ -7,29 +7,27 @@
 # Created on: Fall 2019
 #--------------------------------------------------------------
 
+
+
+
+#---- old work
 # Create a variable pointing to the file with no header
-fileName = "Data/Raw/SaraNoHeader.txt"
+fileName = "Data/Raw/SaraNoHeader2.txt"
 # Open the file as a read-only file object
 fileObj = open(fileName, 'r')
 
 # Read in all lines in the text file into a list variable
-#lineList = fileObj.readlines()
+lineList = fileObj.readlines()
+
 # Closes the file object (now that we have all we need)
-#fileObj.close()
+fileObj.close()
 
-#WHILE
-#REad data
-lineString= fileObj.readline()
-
-#While loop
-while lineString:
-
-    # deleted 
 # Extract the first line from the lineList
-#for lineString in lineList:
-    ####
+for lineString in lineList:
+    
     # Use the split command to parse the items in lineString into a list object
     lineData = lineString.split("\t")
+    
     # Assign variables to specfic items in the list
     recordID = lineData[0]              # ARGOS tracking record ID
     obsDateTime = lineData[2]           # Observation date and time (combined)
@@ -38,9 +36,10 @@ while lineString:
     obsLC = lineData[3]                 # Observation Location Class
     obsLat = lineData[5]                # Observation Latitude
     obsLon = lineData[6]                # Observation Longitude
+    
     # Print information to the user
-    print ("Record {0} indicates Sara was seen at {1}N and {2}W on {3}".
-           format(recordID,obsLat,obsLat,obsDate))# Copy and paste a line of data as the lineString variable value
+    print ("Record {0} indicates Sara was seen at {1}N and {2}W on {3}".format(recordID,obsLat,obsLon,obsDate))
 
-    lineString=fileObj.readline()
-fileObj.close()
+
+
+
